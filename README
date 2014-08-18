@@ -1,3 +1,17 @@
+Von Neumann Computer System Block Diagram
+
+    ++++++               ++++++
+    + CPU +  ++++++++    ------
+    ++++++      +        ------
+                +        ------
+                +        ------
+                +        Memory
+          ------------     .
+        + i/o devices +    .
+          ------------   ------
+                         ++++++
+
+
 PATH=~/usr/hla:$PATH
 hlalib=~/usr/hla/hlalib
 export hlalib

@@ -83,6 +83,25 @@ mov( source_operand, destination_operand );
 	--------------
 	destination_operand = source_operand;
 
+add( source_operand, destination_operand );
+        
+        - ADD does not support memory-to-memory operations.        
+	
+	HLL equivalent:
+        --------------
+        destination_operand = destination_operand + source_operand;
+	destination_operand += source_operand;
+
+sub( source_operand, destination_operand );
+	
+	- SUB does not support memory-to-memory operations.
+        
+	HLL equivalent:
+        --------------
+        destination_operand = destination_operand - source_operand;
+        destination_operand -= source_operand;
+
+
 
 PATH=~/usr/hla:$PATH
 hlalib=~/usr/hla/hlalib

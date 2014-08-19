@@ -4,12 +4,15 @@ Program DemoVars;
 static
     InitDemo:int32 := 5;
     NotInit: int32;
-
+    BoolVar: boolean := false;
+    LetterA: char := 'A';
 begin DemoVars;
 
     stdout.put( "InitDemo's value is ", InitDemo, nl);
     stdout.put( "Enter a value:" );
     stdin.get(NotInit);
     stdout.put( "You entered: ", NotInit, nl);
+    stdout.put( "BoolVar value: ", BoolVar, nl);
+    stdout.put( "LetterA value: ", LetterA, nl);
 
 end DemoVars;

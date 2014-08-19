@@ -1,3 +1,45 @@
+
+The Intel CPU family is generally classified as a Von Neumann Architecture Machine.
+The Intel CPU registers can be broken down into four categories: general purpose registers, special purpose application accessible registers, segment registers,
+and special purpose kernel mode registers.
+
+The 80x86 (Intel family) CPUs provide several general purpose registers for application use. These
+include eight 32-bit registers that have the following names:
+EAX, EBX, ECX, EDX, ESI, EDI, EBP, and ESP
+The “E” prefix on each name stands for extended. This prefix differentiates the 32-bit registers from the eight 16-bit registers that have the following names:
+AX, BX, CX, DX, SI, DI, BP, and SP
+Finally, the 80x86 CPUs provide eight 8-bit registers that have the following names:
+AL, AH, BL, BH, CL, CH, DL, and DH
+
+Unfortunately, these are not all separate registers. That is, the 80x86 does not provide 24 independent
+registers. Instead, the 80x86 overlays the 32-bit registers with the 16-bit registers and it overlays the 16-bit
+registers with the 8-bit registers. The following diagram shows this relationship:
+
+The most important thing to note about the general purpose registers is that they are not independent.
+Modifying one register will modify at least one other register and may modify as many as three other registers.
+For example, modification of the EAX register may very well modify the AL, AH, and AX registers as
+well. This fact cannot be overemphasized here. A very common mistake in programs written by beginning
+assembly language programmers is register value corruption because the programmer did not fully understand
+the ramifications of the above diagram.
+
+
+EAX,EBX,ECX,          ESI,EDI,EBP,
+EDX                   ESP
+
+                        ESI
+---------------      ---------------
+EAX  |   AX   |      |       | SI  |
+---------------      --------------- 
+     |AH | AL |
+---------------
+
+                        EDI
+---------------      ---------------
+EBX  |   BX   |      |       | DI  |
+---------------      ---------------
+     |BH | BL |
+---------------
+
 Von Neumann Computer System Block Diagram
 
     ++++++               ++++++
@@ -12,6 +54,36 @@ Von Neumann Computer System Block Diagram
                          ++++++
 
 
+EFLAGS: 32 bit register:
+lower 16 bits of EFLAGS:
+
+overflow(11), direction(10), interrupt disable3(9),
+sign(7), zero(6), auxiliary carry(4), parity(2), and carry flags(0).
+
+Condition Codes:
+Decision making based on previous computations:
+Overflow,carry, sign, zero flags, parity.
+
+EIP: 32 bit register, Instruction Pointer Register
+Implicit operand, x86 instruction set hides it.
+
+SP/ESP: Stack pointer 
+
+Some basic machine instructions:
+
+mov( source_operand, destination_operand );
+
+	- doesn't destroy the original data in the source_operand
+	- do not mix sizes, use same size 8 with 8, 16 with 16 or 32 with 32
+
+	source_operand = register, a memory variable, or a constant
+	destination_operand = register or a memory variable.
+
+	HLL equivalent:
+	--------------
+	destination_operand = source_operand;
+
+
 PATH=~/usr/hla:$PATH
 hlalib=~/usr/hla/hlalib
 export hlalib
@@ -19,3 +91,6 @@ hlainc=~/usr/hla/include
 export hlainc
 
 source .bashrc
+
+
+This text is from the book, Art of Assembly by Randall Hyde.
